@@ -1,0 +1,30 @@
+local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+
+local Window = Rayfield:CreateWindow({
+    Name = "Galaxy Block",
+    LoadingTitle = "Galaxy Block",
+    LoadingSubtitle = "by You",
+    ConfigurationSaving = {
+        Enabled = false
+    }
+})
+
+local Tab = Window:CreateTab("Main", 4483362458)
+
+local Event = game:GetService("ReplicatedStorage"):WaitForChild("SpawnGalaxy Block")
+
+local AutoSpawn = false
+
+Tab:CreateToggle({
+    Name = "Auto Spawn Galaxy Block",
+    CurrentValue = false,
+    Flag = "AutoSpawn",
+    Callback = function(Value)
+        AutoSpawn = Value
+
+        while AutoSpawn do
+            Event:FireServer()
+            task.wait(1) -- หน่วง 1 วินาที
+        end
+    end,
+})
